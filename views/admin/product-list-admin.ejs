@@ -1,0 +1,27 @@
+<div class="container-fluid product-list">
+    <% if (prods.length > 0) { %>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <% for (let product of prods) { %>
+        <div class="col mb-4">
+            <div class="card text-center" style='border: 0px;'>
+                <img src="<%=product.imagesUrl[0]%>" class="img-fluid card-img-top">
+                <div class="card-body">
+                    <h3 class="product-title"><%= product.title %></h3>
+                    <h5 class="product-price"><%= product.price %>€</h5>
+                </div>
+                <div>
+                    
+                    <form action="/admin/delete-product" method='POST'>
+                        <a href="/admin/edit-product/<%=product._id%>?edit=true" class='btn btn-secondary'>Éditer</a>
+                        <input type="hidden" value="<%=product._id%>" name="productId">
+                        <button class='btn btn-warning' type='submit'>Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <% } else { %>
+    <h1>No Products Found!</h1>
+    <% } %>
+</div>

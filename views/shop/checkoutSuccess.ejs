@@ -1,0 +1,98 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href='/css/cart.css'>
+<%- include('../includes/facebookPixel.ejs') %>
+</head>
+<script>
+    fbq('track', 'Purchase');
+  </script>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <div class="container">
+            <h1>Merci pour votre commande</h1>
+            <h5>Votre numéro de commande est <%=order._id%></h5>
+            <div class="details">
+                <% if(products.length > 0 || customProducts.length > 0){
+                var i = 0;
+                for(e of products){
+                    if(e.item.active){
+                %>
+                <div class="row mb-4">
+                    <div class="col-md-5 col-lg-3 col-xl-3">
+                        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                            <a href="/product-detail/<%=e.itemId%>">
+                                <div class="mask waves-effect waves-light">
+                                    <img class="img-fluid w-100" src="<%=e.item.imagesUrl[0]%>">
+                                    <div class="mask rgba-black-slight waves-effect waves-light"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-9 col-xl-9">
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h5><%=e.item.title%></h5>
+                                    <p class="mb-3 text-muted text-uppercase small">
+                                        <%=e.item.description%></p>
+                                    <p class="mb-3 text-muted text-uppercase small">Taille: <%=e.size%>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <%i=i+1}}%>
+
+                <%
+            i=0
+            for(e of customProducts){
+            %>
+                <div class="row mb-4">
+                    <div class="col-md-5 col-lg-3 col-xl-3">
+                        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                            <div class="mask waves-effect waves-light ficheCustomJersey">
+                                <a style="color: inherit;" href='/custom-preview/<%=e.item._id%>'>
+                                    <span class='pseudo'
+                                        style="color:<%=e.item.numberColor%>;"><%=e.item.numero%></span>
+                                    <br>
+                                    <span class='pseudo'
+                                        style="color:<%=e.item.pseudoColor%>;"><%=e.item.pseudo%></span>
+                                    <br>+<br>
+                                    <img style="width: 110px;height: 110px;" src='/<%=e.item.logo%>'>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-9 col-xl-9">
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h5>Chaussettes customizées</h5>
+                                    <p class="mb-3 text-muted text-uppercase small">
+                                        Ces chaussettes sont uniques, comme vous.
+                                    </p>
+
+                                    <p class="mb-3 text-muted text-uppercase small">Taille:
+                                        <%=e.item.taille%>
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <%i=i+1}%>
+
+                <%}%>
+            </div>
+        </div>
+    </main>
+
+<%- include('../includes/end.ejs') %>

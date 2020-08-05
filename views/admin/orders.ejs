@@ -1,0 +1,117 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+
+        <div class="container">
+            <h1>Les commandes</h1>
+
+            <%if(orders.length > 0){%>
+            <%for(o of orders){%>
+            <%if(o.status !== 'commande en cours'){%>
+            <div <%if(o.paiement==='vérifié' && o.status==='commande reçu'){%> class="card border-warning"<%}else if(o.status==='produite'){%> class="card border-info"<%}else if(o.status==='envoyée'){%> class="card border-success"<%}else{%>class='card bg-light'<%}%> style="margin-bottom: 20px; margin-top: 10px;">
+                <h5 <%if(o.paiement==='vérifié' && o.status==='commande reçu'){%> class="card-header bg-warning"<%}else if(o.status==='produite'){%> class="card-header bg-info"<%}else if(o.status==='envoyée'){%> class="card-header bg-success"<%}else{%>class="card-header"<%}%>><%=o._id%> - <%=(o.totalPrice+o.shippingPrice).toFixed(2)%>€</h5>
+                <div class="card-body">
+                    <h6 class='text-muted'><%=o.date%></h6>
+                    <h4 class='card-title'>Client</h4>
+                    <ul>
+                        <li><%=o.user.nom%> <%=o.user.prenom%></li>
+                        <li><%=o.user.email%></li>
+                        <li><%=o.user.tel%></li>
+                        <li>Adresse
+                            <ul>
+                                <li><%=o.user.adresseLivraison.adresse%></li>
+                                <li><%=o.user.adresseLivraison.cp%></li>
+                                <li><%=o.user.adresseLivraison.ville%></li>
+                            </ul>
+                        </li>
+                        <li>
+                            Frais d'envois : <%=o.shippingPrice%>€
+                        </li>
+                    </ul>
+                    <%for(product of o.products){%>
+                    <h5 class="card-title"><%=product.item.title%></h5>
+                    <ul>
+                        <li>Taille : <%=product.size%></li>
+                        <li>Quantité : <%=product.qty%></li>
+                        <li>Total : <%=product.price%>€</li>
+                    </ul>
+                    <%}%>
+                                <%for(customProduct of o.customProducts){%>
+                    <h5 class="card-title">Custom Jersey</h5>
+                    <ul>
+                        <li>Taille : <%=customProduct.item.taille%></li>
+                        <li>Quantité : <%=customProduct.qty%></li>
+                        <li>Total : <%=customProduct.price%>€</li>
+                        <li>Details:</li>
+                        <ul>
+                            <li>Bande1 : <%=customProduct.item.bande1%> - <div
+                                    style='width: 20px; height:20px; background-color: <%=customProduct.item.bande1%> ;'>
+                                </div>
+                            </li>
+                            <li>Numéro : <%=customProduct.item.numero%> - <%=customProduct.item.numberColor%>- <div
+                                    style='width: 20px; height:20px; background-color: <%=customProduct.item.numberColor%> ;'>
+                                </div>
+                            </li>
+                            <li>Pseudo : <%=customProduct.item.pseudo%> - <%=customProduct.item.pseudoColor%>- <div
+                                    style='width: 20px; height:20px; background-color: <%=customProduct.item.pseudoColor%> ;'>
+                                </div>
+                            </li>
+                            <li>Bande2 : <%=customProduct.item.bande2%> - <div
+                                    style='width: 20px; height:20px; background-color: <%=customProduct.item.bande2%> ;'>
+                                </div>
+                            </li>
+                            <li>Bande3 : <%=customProduct.item.bande3%> - <div
+                                    style='width: 20px; height:20px; background-color: <%=customProduct.item.bande3%> ;'>
+                                </div>
+                            </li>
+                            <li>Bande4 : <%=customProduct.item.bande4%> - <div
+                                    style='width: 20px; height:20px; background-color: <%=customProduct.item.bande4%> ;'>
+                                </div>
+                            </li>
+                            <li>Logo :<img src="/<%=customProduct.item.logo%>" style="width: 50px; height: 50px;"> </li>
+                        </ul>
+                    </ul>
+                    <%}%>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3">
+                                            <form action='/admin/paiement-verifie' method='POST'>
+                                                <input type='hidden' name='orderId' value='<%=o._id%>'>
+                                                <button class="btn btn-warning" style="margin-left: auto; margin-right: auto;">Vérifié</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-3">
+                                            <form action='/admin/commande-produite' method='POST'>
+                                                <input type='hidden' name='orderId' value='<%=o._id%>'>
+                                                <button class="btn btn-info" style="margin-left: auto; margin-right: auto;">Produite</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-3">
+                                            <form action='/admin/commande-envoyee' method='POST'>
+                                                
+                                                <input type='hidden' name='orderId' value='<%=o._id%>'>
+                                                <button class="btn btn-success" style="margin-left: auto; margin-right: auto;">Envoyée</button>
+                                                <input type='text' name='numeroSuivi' placeholder="Numéro de suivi">
+                                            </form> 
+                                        </div>
+                                        <div class="col-3">
+                                            <form action='/admin/commande-archiver' method='POST'>
+                                                <input type='hidden' name='orderId' value='<%=o._id%>'>
+                                                <button class="btn btn-dark" style="margin-left: auto; margin-right: auto;">Archiver</button>
+                                            </form> 
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    <%}%>
+                    <%}%>
+            <%}%>
+                </div>
+
+
+    </main>
+
+    <%- include('../includes/end.ejs') %>

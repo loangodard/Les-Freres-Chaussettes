@@ -1,0 +1,59 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<%- include('../includes/facebookPixel.ejs') %>
+</head>
+
+<body onload="chargement();">
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <div class="container">
+            <h2>Paiement</h2>
+            <p>Vous allez être automatiquement redirigé vers une page de paiement sécurisé dans <span id="compteur"></span>.</p>
+            <p>Cliquez <button id='order-btn' class='btn'>ici</button> pour être redirigé automatiquement</p>
+
+
+            <script src="https://js.stripe.com/v3/"></script>
+            <script>
+                var Stripe = Stripe("pk_live_51H0TKtIQgIttYEaIadnFKRZlD37zxIkYT9pHKZXGIPpBpqneKFHSZx6WGM66HMxxP9kBecM4M3LthaHvk6m3oYti005iS1uH9w");
+                var orderBtn = document.getElementById('order-btn')
+                orderBtn.addEventListener('click', () => {
+                    Stripe.redirectToCheckout({
+                        sessionId: '<%=sessionId%>',
+                    })
+                })
+            </script>
+            <script>
+                function chargement() {
+                    secondes = 4;
+                    setTimeout(redirect, secondes * 1000);
+                    change_valeur();
+                    timer = setInterval(change_valeur, 1000);
+
+                }
+
+                function redirect() {
+                    Stripe.redirectToCheckout({
+                        sessionId: '<%=sessionId%>',
+                    })
+                }
+
+                function change_valeur() {
+                    if (secondes > 1) {
+                        document.getElementById('compteur').innerHTML = secondes + ' secondes';
+                    }
+
+                    else if (secondes >= 0) {
+                        document.getElementById('compteur').innerHTML = secondes + ' seconde';
+                    }
+
+                    else {
+                        clearTimeout(timer);
+                    }
+                    secondes--;
+                }
+            </script>
+        </div>
+
+    </main>
+
+    <%- include('../includes/end.ejs') %>

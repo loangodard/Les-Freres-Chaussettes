@@ -1,0 +1,60 @@
+.plus,.minus{
+    color : grey;
+    font-weight : bold
+}
+
+.plus:active,.minus:active{
+    color : grey;
+    font-weight : bold;
+    outline:0
+}
+
+.plus:focus,.minus:focus{
+    color : grey;
+    font-weight : bold;
+    outline:0
+}
+
+.quantity{
+    text-align: center;
+    width: 100px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@font-face {
+  font-family: 'octin_sportsheavy';
+  src: url('octin_sports_heavy-webfont.woff2') format('woff2'),
+       url('octin_sports_heavy-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+.pseudo{
+  font-family: 'octin_sportsheavy';
+  font-size: 30px;
+}
+
+.ficheCustomJersey{
+  text-align: center;
+}
+
+a{
+  color: inherit;
+}
+
+a:hover{
+  color:grey;
+  outline: thin;
+}

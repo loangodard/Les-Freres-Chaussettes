@@ -1,0 +1,56 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/index.css">
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+<%- include('../includes/facebookPixel.ejs') %>
+</head>
+
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <main>
+    <br>
+
+
+    <div class="container">
+
+      <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading">Personnalise ta paire de chaussettes. <span class="text-muted">Rend la unique
+              !</span></h2>
+          <p class="lead">Tu peux personnaliser ta paire de chaussettes simplement. Change les couleurs, le pseudo, le
+            numéro et le logo. On s'occupe de tout imprimer rapidement dans notre atelier.</p>
+          <a class="btn btn-info" href="/custom-jersey">Personnalise ta paire ici</a>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <br>
+          <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+            height="500" xmlns="/images/espb.jpg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+            aria-label="Placeholder: 500x500" src='/images/indexCustom.jpg'>
+          <title>Placeholder</title>
+          <!-- <rect width="100%" height="100%" fill="#eee"></rect> -->
+
+        </div>
+      </div>
+      <hr>
+    </div>
+    <h1 class="display-4 font-weight-normal" style="text-align: center;">Nos chaussettes</h1>
+    <%- include('product-list.ejs') %>
+  </main>
+
+  <%- include('../includes/end.ejs') %>

@@ -1,0 +1,35 @@
+.product-detail{
+    margin-top:50px ;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .photo{
+    border: solid 1px blue;
+}
+
+.detail{
+    border: solid 1px red;
+} */
+
+
+.add-cart{
+    color: white;
+    border-radius: 8px;
+    background-color: #487cca;
+    width: 150px;
+    border: solid #487cca;
+    margin-bottom: 20px;
+}
+
+.add-cart:hover{
+    color: #487cca;
+    border-radius: 8px;
+    background-color: white;
+    width: 150px;
+    border: solid #487cca
+}
+
+.desc{
+    margin-bottom: 40px;
+}

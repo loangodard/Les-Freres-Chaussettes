@@ -1,0 +1,95 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/preview.css">
+<link rel='stylesheet' href='/Js/image-picker-master/image-picker/image-picker.css'>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+    .thumbnails.image_picker_selector img {
+        height: 100px;
+        width: 100px,
+    }
+</style>
+<%- include('../includes/facebookPixel.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <div class="container" style="margin-top: 20px;">
+            <form action='/add-to-custom-cart' method="POST">
+                <h1> Visualisation</h1>
+                <div class="row justify-content-around">
+                    <div class="col-6 col-sm-6 col-md-3 mw-100 area">
+                        <div class="content">
+                            <div class="col center">
+                                <div class="row">
+                                    <div class="colorpicker" style='background-color:<%=customJersey.bande1%>; border-radius:3px'></div>
+                                    <!-- <input name='bande1' value="<%=customJersey.bande1%>" class='colorpicker' type="color" disabled> -->
+                                </div>
+                                <div class="row">
+                                    <h1 class="number" style="color:<%=customJersey.numberColor%>"><%=customJersey.numero%></h1>
+                                    <!-- <input name='numero' value="<%=customJersey.numero%>" type='text' class='number'
+                                        id="number" style="color:<%=customJersey.numberColor%>" disabled> -->
+                                </div>
+                                <div class="row">
+                                    <h1 class="pseudo" style="color:<%=customJersey.pseudoColor%>"><%=customJersey.pseudo%></h1>
+                                    <!-- <input name='pseudo' value="<%=customJersey.pseudo%>" type='text' class='pseudo'
+                                        id='pseudo' style="color:<%=customJersey.pseudoColor%>" disabled> -->
+                                </div>
+                                <div class="row">
+                                    <div class="colorpicker" style='background-color:<%=customJersey.bande2%>; border-radius:3px'></div>
+                                    <!-- <input name='bande2' value="<%=customJersey.bande2%>" class='colorpicker' type="color" disabled> -->
+                                </div>
+                                <div class="row">
+                                    <div class="colorpicker2" style='background-color:<%=customJersey.bande3%>; border-radius:3px'></div>
+                                    <!-- <input name='bande3' value="<%=customJersey.bande3%>" class='colorpicker2' type="color" disabled> -->
+                                </div>
+                                <div class="row">
+                                    <div class="colorpicker3" style='background-color:<%=customJersey.bande4%>; border-radius:3px'></div>
+                                    <!-- <input name='bande4' value="<%=customJersey.bande4%>" class='colorpicker3' type="color" disabled> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="face">
+                            <span style="text-decoration:underline; color: grey">Arrière</span>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-3 mw-100 area">
+                        <div class="content">
+                            <div class="logoDiv">
+                                <img class='logo' src='/<%=customJersey.logo%>'>
+                            </div>
+                        </div>
+                        <div class="face">
+                            <span style="text-decoration:underline; color: grey">Avant</span>
+                        </div>
+                    </div>
+                </div>
+                <h2>Taille : <%=customJersey.taille%> EU</h2>
+                <p style="color:grey; font-size: 15px;">Toutes nos chaussettes sont en polyestere</p>
+                <select name='qty' id='qty' class='image-picker'>
+                    <optgroup label="Choisir la quantité">
+                        <option value='1-9.95' data-img-src="/images/custom/1paire.png">1-9.95</option>
+                        <option value='2-16.95' data-img-src="/images/custom/2paires.png">2-16.95</option>
+                        <option value='3-21' data-img-src="/images/custom/3paires.png">3-21</option>
+                    </optgroup>
+                </select>
+
+                
+                <input name='id' type='text' value="<%=customJersey._id%>" hidden>
+                <button type='submit' class='add-cart'>Ajouter au panier</button>
+                <a href='/custom-jersey/<%=customJersey._id%>''>Modifier</a>
+                <br><br>
+            </form>
+        </div>
+
+    </main>
+
+    <script src="/Js/image-picker-master/image-picker/image-picker.min.js"></script>
+    <script>
+        $('.image-picker').imagepicker();
+    </script>
+
+    <%- include('../includes/end.ejs') %>

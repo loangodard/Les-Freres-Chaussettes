@@ -1,0 +1,297 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href='/css/cart.css'>
+<%- include('../includes/facebookPixel.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <div class="container">
+
+            <!--Section: Block Content-->
+            <section class="mt-5 mb-4">
+
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-8">
+
+                        <!-- Card -->
+                        <div class="card wish-list mb-4">
+                            <div class="card-body">
+
+                                <h5 class="mb-4">Panier</h5>
+                                <!------------->
+                                <% if(products.length > 0 || customProducts.length > 0){
+                                    var i = 0;
+                                    for(e of products){
+                                        if(e.item.active){
+                                    %>
+                                <div class="row mb-4">
+                                    <div class="col-md-5 col-lg-3 col-xl-3">
+                                        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                                            <a href="/product-detail/<%=e.itemId%>">
+                                                <div class="mask waves-effect waves-light">
+                                                    <img class="img-fluid w-100" src="<%=e.item.imagesUrl[0]%>">
+                                                    <div class="mask rgba-black-slight waves-effect waves-light"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-lg-9 col-xl-9">
+                                        <div>
+                                            <div class="d-flex justify-content-between">
+                                                <div style="width: 50%;">
+                                                    <h5><%=e.item.title%></h5>
+                                                    <p class="mb-3 text-muted text-uppercase small">
+                                                        <%=e.item.description%></p>
+                                                    <p class="mb-3 text-muted text-uppercase small">Taille: <%=e.size%>
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                                                        <form action="/save-cart" method='POST'>
+                                                            <button style="background-color: white;"
+                                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                                class="btn minus" type='button'>-</button>
+                                                            <input class="quantity" min="1" name="newQuantity"
+                                                                value="<%=e.qty%>" type="number">
+                                                            <button style="background-color: white;"
+                                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                                class="btn plus" type='button'>+</button>
+                                                            <button  style="background-color: white;" type='submit' class='btn'
+                                                                title='Sauvegarder la quantité'>
+                                                                <svg width="1em" height="1em" viewBox="0 0 16 16"
+                                                                    class="bi bi-arrow-repeat" fill="currentColor"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z" />
+                                                                </svg>
+                                                            </button>
+                                                            <input name='productIndex' value='<%=i%>' hidden>
+                                                            <input name="productId" value="<%=e.itemId%>" hidden>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <form action="/cart-delete-item" method="POST">
+                                                        <input type="hidden" value="<%=e.itemId%>" name="prodId">
+                                                        <input type="hidden" value="<%=e.item.price%>" name="price">
+                                                        <input type="hidden" value="<%=e.size%>" name="sizeToDelete">
+                                                        <button class="btn btn-link" type="submit">Retirer du
+                                                            panier</button>
+                                                    </form>
+                                                </div>
+                                                <p class="mb-0"><span><strong><%=e.item.price%> €</strong></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mb-4">
+                                <%i=i+1}}%>
+
+                                <%
+                                i=0
+                                for(e of customProducts){
+                                %>
+                                <div class="row mb-4">
+                                    <div class="col-md-5 col-lg-3 col-xl-3">
+                                        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                                            <div class="mask waves-effect waves-light ficheCustomJersey">
+                                                <a href='/custom-preview/<%=e.item._id%>'>
+                                                    <span class='pseudo'
+                                                        style="color:<%=e.item.numberColor%>;"><%=e.item.numero%></span>
+                                                    <br>
+                                                    <span class='pseudo'
+                                                        style="color:<%=e.item.pseudoColor%>;"><%=e.item.pseudo%></span>
+                                                    <br>+<br>
+                                                    <img style="width: 110px;height: 110px;" src='/<%=e.item.logo%>'>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-lg-9 col-xl-9">
+                                        <div>
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <h5>Chaussettes customizées</h5>
+                                                    <p class="mb-3 text-muted text-uppercase small">
+                                                        Ces chaussettes sont uniques, comme vous.
+                                                    </p>
+
+                                                    <p class="mb-3 text-muted text-uppercase small">Taille:
+                                                        <%=e.item.taille%>
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                                                        <form action="/save-cart" method='POST'>
+                                                            <button
+                                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                                class="btn minus" type='button' disabled>-</button>
+                                                            <input class="quantity" min="1" name="newQuantity"
+                                                                value="<%=e.qty%>" type="number" disabled>
+                                                            <button
+                                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                                class="btn plus" type='button' disabled>+</button>
+                                                            <!-- <button disabledtype='submit' class='btn'
+                                                                title='Sauvegarder la quantité'>
+                                                                <svg width="1em" height="1em" viewBox="0 0 16 16"
+                                                                    class="bi bi-arrow-repeat" fill="currentColor"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z" />
+                                                                </svg>
+                                                            </button> -->
+                                                            <input name='productIndex' value='<%=i%>' hidden>
+                                                            <input name="productId" value="<%=e.itemId%>" hidden>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <form action="/cart-delete-custom-item" method="POST">
+                                                        <input type="hidden" value="<%=e.price%>" name="price">
+                                                        <input type="hidden" value="<%=e.qty%>" name="qty">
+                                                        <input type="hidden" value="<%=i%>" name="indexToDelete">
+                                                        <button class="btn btn-link" type="submit">Retirer du
+                                                            panier</button>
+                                                    </form>
+                                                </div>
+                                                <p class="mb-0"><span><strong><%=e.price%> €</strong></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mb-4">
+                                <%i=i+1}%>
+
+                                <%}else{%>
+                                <h2>Le panier est vide</h2>
+                                <%}%>
+                                <!------------->
+                                
+
+                            </div>
+                        </div>
+                        <!-- Card -->
+
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <h5 class="mb-4">Temps de livraison</h5>
+
+                                <p class="mb-0">Toutes nos chaussettes sont imprimées sur commande, les chaussettes sont envoyées sous 1 à 5 jours. Le délais de livraison est de 2 à 4 jours. Nous expédions vos commandes par la poste avec un numéro de suivi.</p>
+                            </div>
+                        </div>
+                        <!-- Card -->
+
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <h5 class="mb-4">Moyens de paiement acceptés</h5>
+
+                                <img class="mr-2" width="45px"
+                                    src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                                    alt="Visa">
+                                <img class="mr-2" width="45px"
+                                    src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                                    alt="American Express">
+                                <img class="mr-2" width="45px"
+                                    src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                                    alt="Mastercard">
+                            </div>
+                        </div>
+                        <!-- Card -->
+
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4">
+
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <h5 class="mb-3">Total</h5>
+
+                                <ul class="list-group list-group-flush">
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                        Sous-total
+                                        <span><%= totalPrice.toFixed(2) %> €</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    Envois
+                                    <span><%if(shippingPrice){%><%=shippingPrice.toFixed(2)%><%}else{%>0<%}%> €</span>
+                                </li>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                    <div>
+                                        <strong>Total</strong>
+                                        <strong>
+                                            <p class="mb-0">TTC</p>
+                                        </strong>
+                                    </div>
+                                    <span><strong><%if(shippingPrice){%><%=(totalPrice+shippingPrice).toFixed(2)%><%}else{%>0<%}%> €</strong></span>
+                                </li>
+                                </ul>
+                                <form action='/create-order' method="POST">
+                                    <button type="submit" class="btn btn-primary btn-block waves-effect waves-light">
+                                        Commander
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                        <!-- Card -->
+
+                        <!-- Card -->
+                        <!-- CODE PROMO -->
+                        <!-- <div class="card mb-4">
+                    <div class="card-body">
+      
+                      <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Ajouter un code promo
+                        <span><i class="fas fa-chevron-down pt-1"></i></span>
+                      </a>
+      
+                      <div class="collapse" id="collapseExample">
+                        <div class="mt-3">
+                          <div class="md-form md-outline mb-0">
+                            <input type="text" id="discount-code" class="form-control font-weight-light"
+                              placeholder="Enter discount code">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                        <!-- Card -->
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Block Content-->
+
+        </div>
+    </main>
+
+    <%- include('../includes/end.ejs') %>

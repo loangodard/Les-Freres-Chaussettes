@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'octin_sportsheavy';
+    src: url('octin_sports_heavy-webfont.woff2') format('woff2'),
+         url('octin_sports_heavy-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.customArea{
+    border:solid 1px;
+    width: 300px;
+    height: 550px;
+    text-align: center;
+}
+
+
+
+
+form{
+    display: inline-block;
+    text-align: center;
+}
+
+.colorpicker{
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 35px;
+    height: 70px;
+    padding: 0px;
+    border-width: 0;
+    border: none;
+    background-color: white;
+}
+
+.colorpicker2{
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 35px;
+    height: 50px;
+    padding: 0px;
+    border-width: 0;
+    border: none;
+    background-color: white;
+}
+
+.colorpicker3{
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 35px;
+    height: 40px;
+    padding: 0px;
+    border-width: 0;
+    border: none;
+    background-color: white;
+}
+
+.colorpicker4{
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 70px;
+    height: 35px;
+    padding: 0px;
+    border-width: 0;
+    border: none;
+    background-color: white;
+}
+
+input[type="text"]
+{
+    font-family: 'octin_sportsheavy';
+    text-align: center;
+    line-height:0;
+    border:none;
+    width: 280px;
+}
+.pseudo{
+    font-size:50px
+}
+
+.number{
+    font-size:100px;
+}
+
+input:focus{
+    outline: none;
+}

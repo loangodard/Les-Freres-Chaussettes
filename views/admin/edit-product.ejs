@@ -1,0 +1,70 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/add-product.css">
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <div class='container'>
+            <h1><% if(editing){%>Editer un produit <%}else{%>Ajouter un produit<%}%></h1>
+            <form action="<%if(editing){%> /admin/edit-product <%}else{%> /admin/add-product
+                <%}%>" method="POST" <%if(!editing){%>enctype="multipart/form-data"<%}%>>
+                <div class='form-group'>
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" class='form-control input' value='<%if(editing){%><%=product.title%><% } %>'>
+        </div>
+        <!-- <div class='form-group'>
+            <label for="imageUrl">ImageUrl</label>
+            <input type="text" name="imageUrl" id="imageUrl" class='form-control input'
+                value='<% if(editing){%><%=product.imageUrl%><%}%>'>
+                </div> -->
+        <div class='form-group'>
+            <label for="imageUrl">Images</label>
+            <br>
+            <input type="file" name="images" id="images" multiple <% if(editing){%>disabled<%}%>>
+        </div>
+        <div class='form-group'>
+            <label for="price">Prix</label>
+            <input type="number" name="price" id="price" class='form-control input' step="0.01"
+                value='<% if(editing){%><%=product.price%><%}%>'>
+                </div>
+                <div class='form-group'>
+                    <label for="description">Description</label>
+                    <textarea type="text" name="description" id="description" class='form-control input' rows="5"><%if(editing){%><%=product.description%><%}%></textarea>
+                </div>
+                <p>Laisser les champs vides s'il y a moins de 3 tailles</p>
+                <div class='form-group'>
+                    <label for="price">Taille 1</label>
+                    <input type="text" name="size1" id="size1" class='form-control input' value='<% if(editing){%><%=product.size[0]%><%} %>'>
+        </div>
+        <div class='form-group'>
+            <label for="price">Taille 2</label>
+            <input type="text" name="size2" id="size2" class='form-control input'
+                value='<% if(editing){%><%=product.size[1]%><%} %>'>
+        </div>
+        <div class='form-group'>
+            <label for="price">Taille 3</label>
+            <input type="text" name="size3" id="size3" class='form-control input'
+                value='<% if(editing){%><%=product.size[2]%><%} %>'>
+        </div>
+        <%if(editing){%>
+        <input type='hidden' value="<%= product._id %>" name="productId">
+        <%}%>
+                
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="active" name="active" <% if(editing){ if(product.active === true ){%> checked<%}}else{%>checked<%}%>>
+                    <label class="form-check-label" for="active">
+                      Activer le produit
+                    </label>
+                  </div>
+                  <br>
+                  <button class="btn btn-primary" type="submit"><% if(editing){%>Sauvegarder<%}else{%>Ajouter<%}%></button>
+                
+            </form>
+            <br>
+        </div>
+    </main>
+    <%- include('../includes/end.ejs') %>

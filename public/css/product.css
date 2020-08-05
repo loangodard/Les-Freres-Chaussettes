@@ -1,0 +1,33 @@
+.product-price{
+    text-align: center;
+}
+
+.product-title{
+    text-align:center;
+}
+
+.product-desc{
+    text-align: justify;
+}
+
+.product-list{
+    margin-top: 10px;
+    padding-left:60px;
+    padding-right:60px
+}
+
+.details{
+    color: white;
+    border-radius: 8px;
+    background-color: #487cca;
+    width: 100px;
+    border: solid #487cca
+}
+
+.details:hover{
+    color: #487cca;
+    border-radius: 8px;
+    background-color: white;
+    width: 100px;
+    border: solid #487cca
+}

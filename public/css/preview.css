@@ -1,0 +1,133 @@
+.area{
+    border:solid;
+    height: 550px;
+    margin-bottom: 25px;
+}
+
+.content{
+    height:510px;
+    border:solid white;
+}
+
+.logoDiv{
+    /* top:25%; */
+    height:310px;
+    /* border:solid */
+}
+
+.logo{
+    margin-top: 46px;
+    /* top: 50%; */
+    display: block;
+    width: 218px;
+    height: 218px;
+    margin-left: auto;
+    margin-right: auto;
+    /* border:solid; */
+}
+
+
+
+.face{
+    text-align: center;
+}
+
+@font-face {
+    font-family: 'octin_sportsheavy';
+    src: url('octin_sports_heavy-webfont.woff2') format('woff2'),
+         url('octin_sports_heavy-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.customArea{
+    border:solid 1px;
+    width: 300px;
+    height: 550px;
+    text-align: center;
+}
+
+.colorpicker{
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 70px;
+    padding: 0px;
+    border-width: 0;
+    border: none;
+    background-color: white;
+}
+
+.colorpicker2{
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 45px;
+    padding: 0px;
+    border-width: 0;
+    border: none;
+    background-color: white;
+}
+
+.colorpicker3{
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 35px;
+    padding: 0px;
+    border-width: 0;
+    border: none;
+    background-color: white;
+}
+
+input[type="text"]
+{
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'octin_sportsheavy';
+    text-align: center;
+    line-height:0;
+    border:none;
+    width: 220px;
+}
+
+input[type="text"]:disabled
+{
+    color:black;
+    background-color:white
+}
+.pseudo{
+    font-size:50px;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'octin_sportsheavy';
+    text-align: center;
+    width: 220px;
+}
+
+.number{
+    font-size:100px;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'octin_sportsheavy';
+    text-align: center;
+    width: 220px;
+}
+
+
+input:focus{
+    outline: none;
+}
+
+.add-cart{
+    color: white;
+    border-radius: 8px;
+    background-color: #487cca;
+    width: 150px;
+    border: solid #487cca;
+    margin-bottom: 20px;
+}
